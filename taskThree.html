@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #424242;
+      }
+      .container {
+        width: 300px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        align-items: center;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+      }
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #44eb7c;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #29590d;
+      }
+      .error-message {
+        color: #ff0000;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <img src="smartserv.png" />
+        <div class="error-message" id="emailError"></div>
+        <input type="text" id="email" placeholder="Username" />
+        <div class="error-message" id="passwordError"></div>
+        <input type="password" id="password" placeholder="Password" />
+        <input type="submit" value="Login" />
+        <div style="text-align: center">
+          <a href="support@smartserv.io">Forgot your password?</a
+          >​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailInput.value)) {
+          emailError.textContent = "Please enter a valid email address";
+          return;
+        } else {
+          emailError.textContent = "";
+        }
+
+        // Password validation
+        const password = passwordInput.value;
+        const passwordRegex =
+          /^(?=.*[A-Z])(?=.*\d)(?!.*[@].*[@])(?!.*[^@A-Za-z\d]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+          passwordError.textContent =
+            "Password must contain at least 1 uppercase letter, 1 number, and only @ as a special character (if present), minimum length of 8 characters";
+          return;
+        } else {
+          passwordError.textContent = "";
+        }
+
+        // If validations pass, proceed with login (for demonstration purposes, just alert)
+        alert("Login successful!");
+      });
+    </script>
+  </body>
+</html>
